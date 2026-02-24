@@ -40,6 +40,8 @@ function ProductsManager() {
     minOrderQuantity: 1,
     image: null,
     isActive: true,
+    isOfferOfDay: false,
+    isFeatured: false,
   })
 
   useEffect(() => {
@@ -88,6 +90,8 @@ function ProductsManager() {
       minOrderQuantity: product.minOrderQuantity || 1,
       image: null,
       isActive: product.isActive,
+      isOfferOfDay: product.isOfferOfDay || false,
+      isFeatured: product.isFeatured || false,
     })
     setImagePreview(product.image?.url)
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -105,6 +109,8 @@ function ProductsManager() {
       minOrderQuantity: 1,
       image: null,
       isActive: true,
+      isOfferOfDay: false,
+      isFeatured: false,
     })
     setImagePreview(null)
     const fileInput = document.getElementById('product-image')
@@ -359,6 +365,30 @@ function ProductsManager() {
                   rows="3"
                   className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
                 />
+              </div>
+
+              <div>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    name="isOfferOfDay"
+                    checked={formData.isOfferOfDay}
+                    onChange={handleInputChange}
+                    className="h-4 w-4 rounded border-slate-300 text-red-600 focus:ring-red-500"
+                  />
+                  <span className="text-sm font-medium text-slate-700">Offer of the Day</span>
+                </label>
+
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    name="isFeatured"
+                    checked={formData.isFeatured}
+                    onChange={handleInputChange}
+                    className="h-4 w-4 rounded border-slate-300 text-red-600 focus:ring-red-500"
+                  />
+                  <span className="text-sm font-medium text-slate-700">Featured Product</span>
+                </label>
               </div>
 
               <div>

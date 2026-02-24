@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, MoreHorizontal } from 'lucide-react'
 import {
   Carousel,
   CarouselContent,
@@ -74,7 +74,10 @@ function Banners() {
   ]
 
   const handleCategoryClick = (categoryId) => {
-    if (!categoryId) return
+    if (!categoryId) {
+      navigate('/products')
+      return
+    }
     navigate(`/products?category=${encodeURIComponent(categoryId)}`)
   }
 
@@ -89,52 +92,59 @@ function Banners() {
             Quickly scan the types of lines you plan to stock today.
           </p>
         </div>
-        <Popover>
-          <PopoverTrigger asChild>
+        
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleCategoryClick(null)}
+            className="shrink-0 h-8 rounded-full border-slate-200 bg-white px-4 text-xs font-medium text-slate-700 hover:bg-slate-50"
+          >
+            All
+          </Button>
+          
+          {normalizedCategories.slice(0, 8).map((cat) => (
             <Button
+              key={cat.key}
               variant="outline"
               size="sm"
-              className="h-8 rounded-md border-slate-200 bg-white px-3 text-xs font-medium text-slate-700 hover:bg-slate-50"
+              onClick={() => handleCategoryClick(cat.key)}
+              className="shrink-0 h-8 rounded-full border-slate-200 bg-white px-4 text-xs font-medium text-slate-700 hover:bg-slate-50"
             >
-              All categories
-              <ChevronDown className="ml-1.5 h-3.5 w-3.5 text-slate-400" />
+              {cat.label}
             </Button>
-          </PopoverTrigger>
-          <PopoverContent
-            align="start"
-            className="w-[720px] max-w-[90vw] sm:w-[820px]"
-          >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
-              All wholesale categories
-            </p>
-            <p className="mt-1 text-[11px] text-slate-500">
-              Scan all lines in one view. Future categories will auto-flow into
-              this grid.
-            </p>
-            <div className="mt-4 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-              {categoryGroups.map((group) => (
-                <div key={group.label} className="space-y-1.5">
-                  <div className="text-[11px] font-semibold text-slate-800">
-                    {group.label}
-                  </div>
-                  <div className="flex flex-col gap-0.5">
-                    {group.items.map((item) => (
-                      <button
-                        key={item.key}
-                        type="button"
-                        onClick={() => handleCategoryClick(item.key)}
-                        className="truncate rounded-md bg-slate-50 px-2 py-1 text-left text-[11px] text-slate-700 hover:bg-red-50 hover:text-red-700"
-                        title={item.label}
-                      >
-                        {item.label}
-                      </button>
-                    ))}
-                  </div>
+          ))}
+
+          {normalizedCategories.length > 8 && (
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="shrink-0 h-8 w-8 rounded-full border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                >
+                  <MoreHorizontal className="h-4 w-4" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent
+                align="end"
+                className="w-[300px] p-2"
+              >
+                <div className="grid grid-cols-2 gap-1">
+                  {normalizedCategories.slice(8).map((cat) => (
+                    <button
+                      key={cat.key}
+                      onClick={() => handleCategoryClick(cat.key)}
+                      className="truncate rounded-md px-2 py-1.5 text-left text-xs text-slate-700 hover:bg-slate-100"
+                    >
+                      {cat.label}
+                    </button>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </PopoverContent>
-        </Popover>
+              </PopoverContent>
+            </Popover>
+          )}
+        </div>
       </div>
       <div className="rounded-3xl border border-slate-100 bg-slate-900/90">
         <Carousel setApi={setApi} className="w-full">

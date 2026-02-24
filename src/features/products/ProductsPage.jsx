@@ -8,7 +8,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '../../components/ui/popover'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, MoreHorizontal } from 'lucide-react'
 import ProductCard from '../home/components/ProductCard.jsx'
 import { fetchCategories, selectAllCategories } from '../../features/categories/categorySlice'
 import { fetchProducts, selectAllProducts, getProductsPages } from '../../features/products/productSlice'
@@ -48,16 +48,10 @@ function ProductsPage() {
 
   const filteredProducts = allProducts
 
-  const selectedLabel =
-    selectedCategory === 'all'
-      ? 'All categories'
-      : normalizedCategories.find((c) => c.key === selectedCategory)?.label ||
-        'All categories'
-
   return (
     <MainLayout>
       <section className="mt-6">
-        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-4 space-y-3">
           <div className="space-y-1">
             <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-red-500">
               Products
@@ -71,70 +65,78 @@ function ProductsPage() {
             </p>
           </div>
 
-          <div className="sm:text-right">
-            <p className="text-[11px] uppercase tracking-[0.22em] text-slate-500">
-              Category filter
-            </p>
-            <Popover open={isOpen} onOpenChange={setIsOpen}>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="mt-1 h-9 rounded-md border-slate-200 bg-white px-3 text-xs font-medium text-slate-700 hover:bg-slate-50"
-                >
-                  {selectedLabel}
-                  <ChevronDown className="ml-1.5 h-3.5 w-3.5 text-slate-400" />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent
-                align="end"
-                className="w-[320px] max-w-[90vw] sm:w-[360px]"
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
+            <Button
+              variant={selectedCategory === 'all' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => {
+                setSelectedCategory('all')
+                setPageNumber(1)
+              }}
+              className={`shrink-0 h-8 rounded-full px-4 text-xs font-medium ${
+                selectedCategory === 'all'
+                  ? 'bg-red-600 text-white hover:bg-red-700'
+                  : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
+              }`}
+            >
+              All
+            </Button>
+            
+            {normalizedCategories.slice(0, 8).map((cat) => (
+              <Button
+                key={cat.key}
+                variant={selectedCategory === cat.key ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => {
+                  setSelectedCategory(cat.key)
+                  setPageNumber(1)
+                }}
+                className={`shrink-0 h-8 rounded-full px-4 text-xs font-medium ${
+                  selectedCategory === cat.key
+                    ? 'bg-red-600 text-white hover:bg-red-700'
+                    : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
+                }`}
               >
-                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
-                  Filter by category
-                </p>
-                <p className="mt-1 text-[11px] text-slate-500">
-                  Pick a broad storage or usage group to see matching sample
-                  products.
-                </p>
+                {cat.label}
+              </Button>
+            ))}
 
-                <div className="mt-3 flex flex-wrap gap-1.5">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSelectedCategory('all')
-                      setPageNumber(1)
-                      setIsOpen(false)
-                    }}
-                    className={`rounded-full border px-2.5 py-1 text-[11px] ${
-                      selectedCategory === 'all'
-                        ? 'border-red-500 bg-red-50 text-red-700'
-                        : 'border-slate-200 bg-white text-slate-600 hover:border-red-300 hover:text-red-700'
-                    }`}
+            {normalizedCategories.length > 8 && (
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="shrink-0 h-8 w-8 rounded-full border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
                   >
-                    All categories
-                  </button>
-                  {normalizedCategories.map((cat) => (
-                    <button
-                      key={cat.key}
-                      type="button"
-                      onClick={() => {
-                        setSelectedCategory(cat.key)
-                        setPageNumber(1)
-                        setIsOpen(false)
-                      }}
-                      className={`rounded-full border px-2.5 py-1 text-[11px] ${
-                        selectedCategory === cat.key
-                          ? 'border-red-500 bg-red-50 text-red-700'
-                          : 'border-slate-200 bg-white text-slate-600 hover:border-red-300 hover:text-red-700'
-                      }`}
-                    >
-                      {cat.label}
-                    </button>
-                  ))}
-                </div>
-              </PopoverContent>
-            </Popover>
+                    <MoreHorizontal className="h-4 w-4" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent
+                  align="end"
+                  className="w-[300px] p-2"
+                >
+                  <div className="grid grid-cols-2 gap-1">
+                    {normalizedCategories.slice(8).map((cat) => (
+                      <button
+                        key={cat.key}
+                        onClick={() => {
+                          setSelectedCategory(cat.key)
+                          setPageNumber(1)
+                        }}
+                        className={`truncate rounded-md px-2 py-1.5 text-left text-xs ${
+                          selectedCategory === cat.key
+                            ? 'bg-red-50 text-red-700 font-medium'
+                            : 'text-slate-700 hover:bg-slate-100'
+                        }`}
+                      >
+                        {cat.label}
+                      </button>
+                    ))}
+                  </div>
+                </PopoverContent>
+              </Popover>
+            )}
           </div>
         </div>
 

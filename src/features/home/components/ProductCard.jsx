@@ -52,11 +52,6 @@ function ProductCard({ product }) {
           {name}
         </h3>
 
-        {/* Price */}
-        <div className="mb-3 text-lg font-semibold text-slate-600">
-          ${Number(price).toFixed(2)}
-        </div>
-
         {/* Rating */}
         <div className="flex items-center justify-center gap-1">
           {Array.from({ length: 5 }).map((_, index) => (

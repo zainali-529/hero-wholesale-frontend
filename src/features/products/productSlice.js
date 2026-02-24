@@ -2,9 +2,9 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../../api/axios';
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async (params = {}) => {
-  const { keyword, category, pageNumber } = params;
+  const { keyword, category, pageNumber, isOfferOfDay, isFeatured } = params;
   const response = await api.get('/products', {
-    params: { keyword, category, pageNumber },
+    params: { keyword, category, pageNumber, isOfferOfDay, isFeatured },
   });
   return response.data;
 });
@@ -56,6 +56,8 @@ const productSlice = createSlice({
   name: 'products',
   initialState: {
     items: [],
+    offers: [], // Add separate state for offers
+    featured: [], // Add separate state for featured products
     page: 1,
     pages: 1,
     status: 'idle',
@@ -72,9 +74,15 @@ const productSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.items = action.payload.products;
-        state.page = action.payload.page;
-        state.pages = action.payload.pages;
+        if (action.meta.arg && action.meta.arg.isOfferOfDay) {
+          state.offers = action.payload.products;
+        } else if (action.meta.arg && action.meta.arg.isFeatured) {
+          state.featured = action.payload.products;
+        } else {
+          state.items = action.payload.products;
+          state.page = action.payload.page;
+          state.pages = action.payload.pages;
+        }
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = 'failed';
@@ -111,6 +119,8 @@ const productSlice = createSlice({
 export default productSlice.reducer;
 
 export const selectAllProducts = (state) => state.products.items;
+export const selectAllOffers = (state) => state.products.offers;
+export const selectAllFeatured = (state) => state.products.featured;
 export const getProductsStatus = (state) => state.products.status;
 export const getProductsError = (state) => state.products.error;
 export const getProductsPage = (state) => state.products.page;
