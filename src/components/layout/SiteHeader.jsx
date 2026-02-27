@@ -1,12 +1,14 @@
-import { Menu } from 'lucide-react'
+import { Menu, ShoppingCart } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { Button } from '../ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet'
+import { selectCartTotalItems } from '../../features/cart/cartSlice'
 
 const navItems = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
-  { label: 'Product', to: '/products' },
+  { label: 'Products', to: '/products' },
 ]
 
 function BrandMark() {
@@ -75,6 +77,8 @@ function MobileNav() {
 }
 
 function SiteHeader() {
+  const cartTotal = useSelector(selectCartTotalItems)
+
   return (
     <header className="sticky top-0 z-40 border-b border-red-100 bg-white/95 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
@@ -88,6 +92,14 @@ function SiteHeader() {
           <DesktopNav />
         </div>
         <div className="flex items-center gap-3">
+          <Link to="/cart" className="relative flex h-10 w-10 items-center justify-center rounded-full text-slate-700 hover:bg-slate-50 hover:text-red-600">
+            <ShoppingCart className="h-5 w-5" />
+            {cartTotal > 0 && (
+              <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white shadow-sm ring-2 ring-white">
+                {cartTotal}
+              </span>
+            )}
+          </Link>
           <Button asChild className="hidden rounded-full bg-red-600 px-5 text-white shadow-sm hover:bg-red-500 sm:inline-flex">
             <Link to="/contact">Contact Us</Link>
           </Button>

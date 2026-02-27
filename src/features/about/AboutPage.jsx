@@ -8,7 +8,7 @@ function AboutPage() {
       name: 'Sarah Chen',
       role: 'CEO & Founder',
       image: '/team-1.jpg',
-      bio: 'With 15+ years in wholesale distribution, Sarah founded Hero Foods to revolutionize bulk supply chains.'
+      bio: 'With 20+ years in catering supply, Sarah established Hero Catering to serve takeaway shops efficiently.'
     },
     {
       name: 'Marcus Rodriguez',
@@ -26,39 +26,39 @@ function AboutPage() {
 
   const values = [
     {
-      title: 'Quality First',
-      description: 'We source only premium products that meet rigorous quality standards for your business.'
-    },
-    {
       title: 'Reliability',
       description: 'Consistent on-time delivery and dependable service you can count on every time.'
     },
     {
-      title: 'Innovation',
-      description: 'Continuously improving our processes and offerings to stay ahead of market demands.'
+      title: 'Quality Assurance',
+      description: 'We source only premium products that meet rigorous quality standards for your business.'
     },
     {
-      title: 'Partnership',
-      description: 'Building genuine relationships with our customers, not just transactions.'
+      title: 'Customer Focus',
+      description: 'Dedicated to understanding and meeting the unique needs of every takeaway business.'
+    },
+    {
+      title: 'Efficiency',
+      description: 'Streamlined ordering and delivery processes to save you time and effort.'
     }
   ]
 
   const sellingPoints = [
     {
-      number: '15+',
+      number: '20+',
       label: 'Years Industry Experience'
     },
     {
-      number: '500+',
-      label: 'Active Clients Nationwide'
+      number: '1000+',
+      label: 'Happy Customers'
     },
     {
-      number: '99.2%',
+      number: '99%',
       label: 'On-Time Delivery Rate'
     },
     {
       number: '24/7',
-      label: 'Customer Support'
+      label: 'Online Ordering'
     }
   ]
 
@@ -79,10 +79,10 @@ function AboutPage() {
               Our Story
             </p>
             <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4 max-w-3xl leading-tight">
-              Revolutionizing Wholesale Distribution
+              Supplying Takeaway Shops Efficiently
             </h1>
             <p className="text-lg text-gray-200 max-w-2xl">
-              Connecting businesses with premium wholesale products at scale
+              Operating for over 20 years supplying range of takeaway shops efficiently and smoothly
             </p>
           </div>
         </div>
@@ -96,13 +96,11 @@ function AboutPage() {
               Our Heritage
             </p>
             <h2 className="text-3xl font-bold text-slate-900 mb-4">
-              Built on Trust and Experience
+              Operating for over 20 years
             </h2>
-            <p className="text-slate-600 mb-4 leading-relaxed">
-              Hero Wholesale Foods started with a simple vision: to simplify bulk purchasing for businesses of all sizes. Founded in 2009, we've grown from a small regional distributor to a trusted national partner serving over 500 active clients.
-            </p>
-            <p className="text-slate-600 mb-6 leading-relaxed">
-              Our journey reflects our commitment to understanding the unique challenges of wholesale buyers. We've invested in infrastructure, relationships, and technology to ensure every transaction is seamless and every delivery reliable.
+            <p className="text-slate-600 mb-6">
+              Hero Catering Supplies has been a trusted partner for takeaway shops for over two decades. 
+              We pride ourselves on efficiency, reliability, and smooth operations to ensure your business never runs out of essentials.
             </p>
             <Button className="bg-red-500 hover:bg-red-600 text-white">
               Learn Our Full Story
@@ -128,7 +126,7 @@ function AboutPage() {
                 Our Mission
               </h3>
               <p className="text-slate-600 leading-relaxed">
-                To empower businesses by providing reliable, high-quality wholesale products and services that streamline operations, reduce costs, and enable growth for companies of every size.
+                To provide takeaway businesses with a hassle-free supply chain solution, delivering high-quality catering supplies reliably and efficiently, so they can focus on serving their customers.
               </p>
             </div>
             <div>
@@ -137,7 +135,7 @@ function AboutPage() {
                 Our Vision
               </h3>
               <p className="text-slate-600 leading-relaxed">
-                To be the most trusted and innovative wholesale distribution partner in North America, known for operational excellence, customer-centricity, and industry leadership.
+                To be the preferred catering supply partner for takeaway shops across the UK, recognized for our commitment to service excellence, product quality, and operational efficiency.
               </p>
             </div>
           </div>
@@ -193,42 +191,6 @@ function AboutPage() {
                     {value.description}
                   </p>
                 </div>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="mb-16">
-        <div className="text-center mb-12">
-          <p className="text-xs font-semibold uppercase tracking-widest text-red-500 mb-3">
-            Leadership Team
-          </p>
-          <h2 className="text-3xl font-bold text-slate-900">
-            Meet The Experts Behind Hero Wholesale
-          </h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {teamMembers.map((member, index) => (
-            <Card key={index} className="overflow-hidden border-0 shadow-sm hover:shadow-lg transition-shadow">
-              <div className="aspect-square overflow-hidden bg-slate-200">
-                <img 
-                  src={member.image} 
-                  alt={member.name}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-semibold text-slate-900 mb-1">
-                  {member.name}
-                </h3>
-                <p className="text-sm font-medium text-red-500 mb-3">
-                  {member.role}
-                </p>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  {member.bio}
-                </p>
               </div>
             </Card>
           ))}

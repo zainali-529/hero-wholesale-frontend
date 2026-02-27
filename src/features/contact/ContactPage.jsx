@@ -49,9 +49,9 @@ function ContactPage() {
                       Head Office
                     </p>
                     <p className="text-sm text-slate-600">
-                      123 Wholesale Market, New Food Sector
+                      2 Stacey Avenue
                       <br />
-                      Karachi, Pakistan
+                      London N18 3PL, United Kingdom
                     </p>
                   </div>
                 </div>
@@ -63,12 +63,7 @@ function ContactPage() {
                   <div className="space-y-1">
                     <p className="text-sm font-medium text-slate-900">Phone</p>
                     <p className="text-sm text-slate-600">
-                      <span className="font-medium">Sales:</span> +92 300
-                      1234567
-                    </p>
-                    <p className="text-sm text-slate-600">
-                      <span className="font-medium">Support:</span> +92 300
-                      7654321
+                      <span className="font-medium">Sales:</span> 020 8803 5621
                     </p>
                   </div>
                 </div>
@@ -80,10 +75,7 @@ function ContactPage() {
                   <div className="space-y-1">
                     <p className="text-sm font-medium text-slate-900">Email</p>
                     <p className="text-sm text-slate-600">
-                      sales@wholesalehero.com
-                    </p>
-                    <p className="text-sm text-slate-600">
-                      support@wholesalehero.com
+                      sales@herocateringltd.com
                     </p>
                   </div>
                 </div>
@@ -104,26 +96,8 @@ function ContactPage() {
                 </div>
               </div>
             </div>
-
-            <div className="rounded-2xl border border-slate-100 bg-slate-50 p-6">
-              <h4 className="mb-2 font-medium text-slate-900">
-                Opening a new account?
-              </h4>
-              <p className="mb-4 text-sm text-slate-600">
-                For restaurants and cafes looking to open a credit account,
-                please visit our Partner page for requirements.
-              </p>
-              <Button
-                variant="outline"
-                asChild
-                className="h-8 border-slate-200 bg-white text-xs hover:bg-white hover:text-red-600"
-              >
-                <Link to="/partner">View partner requirements</Link>
-              </Button>
-            </div>
           </div>
 
-          {/* Contact Form Column */}
           <div className="rounded-3xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
             <h3 className="mb-6 text-lg font-semibold text-slate-900">
               Send us a message
@@ -205,17 +179,17 @@ function ContactPage() {
               Come say hello at our main distribution center. We're located in the heart of the wholesale district.
             </p>
           </div>
-          <div className="h-[300px] w-full overflow-hidden rounded-3xl border border-slate-100 bg-slate-50 shadow-sm sm:h-[400px]">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d924237.1542365415!2d66.59496426464843!3d25.19297839616892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33e06651d4bbf%3A0x9cf92f4455504035!2sKarachi%2C%20Karachi%20City%2C%20Sindh%2C%20Pakistan!5e0!3m2!1sen!2s!4v1715421234567!5m2!1sen!2s"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
+          
+          <div className="aspect-[16/9] w-full overflow-hidden rounded-2xl border border-slate-200 shadow-sm sm:aspect-[21/9]">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2477.585724590393!2d-0.05445792434685794!3d51.61271177183754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761e64020c6a31%3A0x6a0f4c0a0c0c0c0c!2s2%20Stacey%20Ave%2C%20London%20N18%203PL%2C%20UK!5e0!3m2!1sen!2s!4v1709123456789!5m2!1sen!2s" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen="" 
+              loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
-              title="Office Location"
-            ></iframe>
+            />
           </div>
         </div>
       </section>

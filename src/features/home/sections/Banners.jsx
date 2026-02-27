@@ -9,12 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '../../../components/ui/carousel'
-import { Button } from '../../../components/ui/button'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '../../../components/ui/popover'
+import { CategoryDropdown } from '../../../components/ui/category-dropdown'
 import { fetchBanners, selectAllBanners } from '../../banners/bannerSlice'
 import { fetchCategories, selectAllCategories } from '../../categories/categorySlice'
 
@@ -73,12 +68,12 @@ function Banners() {
     },
   ]
 
-  const handleCategoryClick = (categoryId) => {
-    if (!categoryId) {
+  const handleCategoryChange = (value) => {
+    if (value === 'all') {
       navigate('/products')
       return
     }
-    navigate(`/products?category=${encodeURIComponent(categoryId)}`)
+    navigate(`/products?category=${encodeURIComponent(value)}`)
   }
 
   return (
@@ -93,57 +88,12 @@ function Banners() {
           </p>
         </div>
         
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => handleCategoryClick(null)}
-            className="shrink-0 h-8 rounded-full border-slate-200 bg-white px-4 text-xs font-medium text-slate-700 hover:bg-slate-50"
-          >
-            All
-          </Button>
-          
-          {normalizedCategories.slice(0, 8).map((cat) => (
-            <Button
-              key={cat.key}
-              variant="outline"
-              size="sm"
-              onClick={() => handleCategoryClick(cat.key)}
-              className="shrink-0 h-8 rounded-full border-slate-200 bg-white px-4 text-xs font-medium text-slate-700 hover:bg-slate-50"
-            >
-              {cat.label}
-            </Button>
-          ))}
-
-          {normalizedCategories.length > 8 && (
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="shrink-0 h-8 w-8 rounded-full border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
-                >
-                  <MoreHorizontal className="h-4 w-4" />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent
-                align="end"
-                className="w-[300px] p-2"
-              >
-                <div className="grid grid-cols-2 gap-1">
-                  {normalizedCategories.slice(8).map((cat) => (
-                    <button
-                      key={cat.key}
-                      onClick={() => handleCategoryClick(cat.key)}
-                      className="truncate rounded-md px-2 py-1.5 text-left text-xs text-slate-700 hover:bg-slate-100"
-                    >
-                      {cat.label}
-                    </button>
-                  ))}
-                </div>
-              </PopoverContent>
-            </Popover>
-          )}
+        <div className="w-full sm:w-[250px]">
+          <CategoryDropdown
+            categories={normalizedCategories}
+            selectedId="all"
+            onSelect={handleCategoryChange}
+          />
         </div>
       </div>
       <div className="rounded-3xl border border-slate-100 bg-slate-900/90">

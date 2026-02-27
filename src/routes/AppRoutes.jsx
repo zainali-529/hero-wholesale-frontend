@@ -5,6 +5,7 @@ import AboutPage from '../features/about/AboutPage.jsx'
 import ContactPage from '../features/contact/ContactPage.jsx'
 import PartnerPage from '../features/partner/PartnerPage.jsx'
 import LoginPage from '../features/auth/LoginPage.jsx'
+import CartPage from '../features/cart/CartPage.jsx'
 import ProtectedRoute from '../components/layout/ProtectedRoute.jsx'
 
 // Admin Components
@@ -21,7 +22,7 @@ function AppRoutes() {
       <Route path="/about" element={<AboutPage />} />
       <Route path="/products" element={<ProductsPage />} />
       <Route path="/contact" element={<ContactPage />} />
-      <Route path="/partner" element={<PartnerPage />} />
+      <Route path="/cart" element={<CartPage />} />
       <Route path="/login" element={<LoginPage />} />
 
       {/* Admin Routes */}
