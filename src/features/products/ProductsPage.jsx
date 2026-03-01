@@ -7,6 +7,7 @@ import { Spinner } from '../../components/ui/spinner'
 import ProductCard from '../home/components/ProductCard.jsx'
 import { fetchCategories, selectAllCategories, getCategoriesStatus } from '../../features/categories/categorySlice'
 import { fetchProducts, selectAllProducts, getProductsPages, getProductsStatus } from '../../features/products/productSlice'
+import { Button } from '../../components/ui/button.js'
 
 function ProductsPage() {
   const dispatch = useDispatch()
